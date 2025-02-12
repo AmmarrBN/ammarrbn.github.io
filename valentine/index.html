@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9e3e3;
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #d32f2f;
+        }
+        
+        .buttons {
+            margin-top: 20px;
+        }
+        
+        .yes-button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .no-button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .gif_container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Style untuk halaman Yes */
+        .hidden {
+            display: none;
+        }
+
+        .header_text {
+            font-size: 3em;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-page">
+        <h1>Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
+        </div>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+        </div>
+    </div>
+
+    <div class="container hidden" id="yes-page">
+        <h1 class="header_text">Knew you would say yes!</h1>
+        <div class="gif_container">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmo3c3l5ODh3ZGN6NHhhaDE2Mjg1ZjkwOXczdDFxbWM3dTBtaW9zaiZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9cw/9XY4f3FgFTT4QlaYqa/giphy.gif" alt="Happy GIF">
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Yang benerrrr?",
+            "Benerannn nihhh??",
+            "Ahhh bbenerannn gmauu?",
+            "Sayanggg please...",
+            "Plisssssss",
+            "Klikk yessssss yahhhhh",
+            "Yessssssss.....",
+            "Hwhwhwhw",
+            "Ok fine, I will stop asking....",
+            "Just kidding, say yes please! ❤️"
+        ];
+
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            const noButton = document.querySelector('.no-button');
+            const yesButton = document.querySelector('.yes-button');
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+        }
+
+        function handleYesClick() {
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('yes-page').classList.remove('hidden');
+        }
+
+        (async function checkForUpdates() {
+            const currentVersion = "1.0";
+            const versionUrl = "https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json"; 
+
+            try {
+                const response = await fetch(versionUrl);
+                if (!response.ok) {
+                    console.warn("Could not fetch version information.");
+                    return;
+                }
+                const data = await response.json();
+                const latestVersion = data.version;
+                const updateMessage = data.updateMessage;
+
+                if (currentVersion !== latestVersion) {
+                    alert(updateMessage);
+                } else {
+                    console.log("You are using the latest version.");
+                }
+            } catch (error) {
+                console.error("Error checking for updates:", error);
+            }
+        })();
+    </script>
+</body>
+</html>
