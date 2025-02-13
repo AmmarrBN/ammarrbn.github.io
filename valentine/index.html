@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Card</title>
+  <style>
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .min-h-screen { min-height: 100vh; }
+    .bg-pink-100 { background-color: #fcd0f3; }
+    .bg-red-500 { background-color: #f87171; }
+    .bg-white { background-color: #ffffff; }
+    .bg-pink-200 { background-color: #fbb6ce; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .shadow-lg { box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+    .cursor-pointer { cursor: pointer; }
+    .transition-all { transition: all 0.5s ease-in-out; }
+    .duration-500 { transition-duration: 500ms; }
+    .transform { transform: scale(1); }
+    .-translate-y-40 { transform: translateY(-10rem); }
+    .-rotate-x-180 { transform: rotateX(180deg); }
+    .opacity-100 { opacity: 1; }
+    .opacity-0 { opacity: 0; }
+    .w-80 { width: 20rem; }
+    .h-60 { height: 15rem; }
+    .w-16 { width: 4rem; }
+    .h-16 { height: 4rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .text-red-500 { color: #f87171; }
+    .text-red-600 { color: #f44336; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .font-bold { font-weight: bold; }
+    .p-6 { padding: 1.5rem; }
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body class="bg-pink-100">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="relative w-80 h-60 bg-red-500 rounded-lg shadow-lg cursor-pointer transition-all duration-500 ease-in-out" onclick="toggleCard()">
+      <div id="cardFront" class="absolute inset-0 bg-white rounded-lg transition-all duration-500 ease-in-out">
+        <div class="flex flex-col items-center justify-center h-full p-6 text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21C12 21 5 13.5 5 8.4C5 6.2 6.5 4.5 8.7 4.5C10.2 4.5 11.6 5.6 12 7.2C12.4 5.6 13.8 4.5 15.3 4.5C17.5 4.5 19 6.2 19 8.4C19 13.5 12 21 12 21Z"></path>
+          </svg>
+          <p class="text-xl font-bold">Click to open</p>
+        </div>
+      </div>
+      <div id="cardBack" class="absolute inset-0 bg-pink-200 rounded-lg p-6 transition-all duration-500 ease-in-out opacity-0">
+        <div class="flex flex-col items-center justify-center h-full text-red-600">
+          <h2 class="text-2xl font-bold mb-4">Happy Valentine's Day!</h2>
+          <p class="text-center">
+            Your love is the most precious gift I could ever receive. Thank you for being you and for being mine. I love you more than words can express!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isOpen = false;
+
+    function toggleCard() {
+      isOpen = !isOpen;
+      const cardFront = document.getElementById("cardFront");
+      const cardBack = document.getElementById("cardBack");
+
+      if (isOpen) {
+        cardFront.style.transform = "rotateX(180deg)";
+        cardBack.style.opacity = "1";
+      } else {
+        cardFront.style.transform = "rotateX(0)";
+        cardBack.style.opacity = "0";
+      }
+    }
+  </script>
+</body>
+</html>
