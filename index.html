@@ -920,6 +920,180 @@
 
         .project-links a:hover { color: var(--accent); }
 
+
+        /* === ACHIEVEMENTS === */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .achievement-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+        }
+
+        .achievement-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .achievement-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .achievement-card:hover .achievement-image img {
+            transform: scale(1.08);
+        }
+
+        .achievement-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .achievement-card:hover .achievement-overlay {
+            opacity: 1;
+        }
+
+        .achievement-overlay i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .achievement-overlay span {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* === LIGHTBOX === */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 60px rgba(0, 212, 170, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-dim);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-caption {
+            margin-top: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+            .achievement-image {
+                height: 200px;
+            }
+            .lightbox img {
+                max-width: 95vw;
+                max-height: 70vh;
+            }
+            .lightbox-close {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .achievement-image {
+                height: 180px;
+            }
+            .lightbox {
+                padding: 1rem;
+            }
+        }
+
         /* === CONTACT === */
         .contact-section { text-align: center; }
         .contact-section .section-header { text-align: center; }
@@ -1145,6 +1319,7 @@
     </style>
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <div class="cursor-glow" id="cursorGlow"></div>
@@ -1157,6 +1332,7 @@
             <li><a href="#journey">Perjalanan</a></li>
             <li><a href="#skills">Keahlian</a></li>
             <li><a href="#projects">Proyek</a></li>
+            <li><a href="#achievements">Prestasi</a></li>
             <li><a href="#contact">Kontak</a></li>
         </ul>
         <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -1478,10 +1654,84 @@
         </div>
     </section>
 
+
+    <!-- Achievements / Sertifikat -->
+    <section id="achievements" class="fade-in">
+        <div class="section-header">
+            <span class="section-label">05 // Prestasi</span>
+            <h2 class="section-title">Sertifikat & <span>Penghargaan</span></h2>
+        </div>
+        <div class="achievements-grid">
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0004.jpg" alt="Sertifikat 1" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0005.jpg" alt="Sertifikat 2" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0006.jpg" alt="Sertifikat 3" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0009.jpg" alt="Sertifikat 4" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0013.jpg" alt="Sertifikat 5" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement-card" onclick="openLightbox(this)">
+                <div class="achievement-image">
+                    <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/wlee/IMG-20260228-WA0015.jpg" alt="Sertifikat 6" loading="lazy">
+                    <div class="achievement-overlay">
+                        <i class="fas fa-expand"></i>
+                        <span>Klik untuk Lihat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightboxBtn(event)" aria-label="Tutup">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="" alt="Sertifikat Full" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
     <!-- Contact -->
     <section id="contact" class="contact-section fade-in">
         <div class="section-header">
-            <span class="section-label">05 // Kontak</span>
+            <span class="section-label">06 // Kontak</span>
             <h2 class="section-title">Mari <span>Bekerja Sama</span></h2>
         </div>
         <div class="contact-card">
@@ -1612,6 +1862,44 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Lightbox Functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            const alt = img.getAttribute('alt');
+            lightboxImg.src = img.src;
+            lightboxCaption.textContent = alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => { lightboxImg.src = ''; }, 400);
+            }
+        }
+
+        function closeLightboxBtn(event) {
+            event.stopPropagation();
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => { lightboxImg.src = ''; }, 400);
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => { lightboxImg.src = ''; }, 400);
+            }
         });
     </script>
 </body>
