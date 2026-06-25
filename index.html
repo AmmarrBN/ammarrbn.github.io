@@ -12,7 +12,7 @@
     <meta property="og:title" content="Ammar Burhanuddin Nafis | Backend & Cyber Security">
     <meta property="og:description" content="Backend Developer, Cyber Security Specialist & Digital Investigator">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ammarbnfis.dev">
+    <meta property="og:url" content="https://ammarbn.dev">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ammar Burhanuddin Nafis">
@@ -552,6 +552,184 @@
             color: var(--text-muted);
         }
 
+        /* === TIMELINE / PERJALANAN === */
+        .timeline-wrapper {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: right;
+            padding-right: 4rem;
+            padding-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year-badge {
+            left: auto;
+            right: -20px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-left: 4rem;
+            position: relative;
+        }
+
+        .timeline-year-badge {
+            position: absolute;
+            left: -20px;
+            top: 0;
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            box-shadow: 0 0 20px var(--accent-glow);
+            z-index: 2;
+        }
+
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .timeline-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .timeline-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .timeline-card .timeline-role {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+        }
+
+        .timeline-tag {
+            padding: 0.25rem 0.7rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--bg);
+            box-shadow: 0 0 20px var(--accent-glow);
+            z-index: 3;
+        }
+
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            opacity: 0.3;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0; }
+        }
+
         /* === SKILLS === */
         .skills-grid {
             display: grid;
@@ -907,6 +1085,36 @@
             .ring-outer { width: 200px; height: 200px; }
             .ring-middle { width: 224px; height: 224px; }
             .ring-inner { width: 248px; height: 248px; }
+
+            /* Timeline responsive */
+            .timeline-line { left: 20px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 50px;
+            }
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-content {
+                text-align: left;
+                padding-left: 0;
+                padding-right: 0;
+                width: 100%;
+            }
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+            .timeline-year-badge {
+                position: relative;
+                left: auto;
+                right: auto;
+                display: inline-block;
+                margin-bottom: 1rem;
+            }
+            .timeline-item:nth-child(even) .timeline-year-badge {
+                right: auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -936,15 +1144,17 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
-        <a href="#" class="logo">ABN<span>.</span></a>
+        <a href="#" class="logo">Portfolio<span>.</span></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about">Tentang</a></li>
+            <li><a href="#journey">Perjalanan</a></li>
             <li><a href="#skills">Keahlian</a></li>
             <li><a href="#projects">Proyek</a></li>
             <li><a href="#contact">Kontak</a></li>
@@ -972,22 +1182,22 @@
                     <div class="ring-middle"></div>
                     <div class="ring-inner"></div>
                     <div class="profile-photo">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" alt="Ammar Burhanuddin Nafis">
+                        <img src="https://raw.githubusercontent.com/AmmarrBN/ammarrbn.github.io/refs/heads/main/profile.jpg" alt="Ammar Burhanuddin Nafis">
                     </div>
                 </div>
             </div>
 
             <div class="hero-badge">
                 <span class="dot"></span>
-                Tersedia untuk proyek baru
+                Welcome To My Portfolio
             </div>
             <h1>
                 <span class="name">Ammar Burhanuddin Nafis</span>
             </h1>
             <div class="roles" id="typewriter"></div>
             <p class="hero-desc">
-                Membangun sistem yang aman, scalable, dan reliable. 
-                Mengubah kompleksitas menjadi solusi elegan melalui kode yang bersih dan arsitektur yang solid.
+                Building systems that are secure, scalable, and just work.
+                Transforming complexity into elegant solutions through clean code and solid architecture.
             </p>
             <div class="hero-cta">
                 <a href="#projects" class="btn btn-primary">Lihat Proyek →</a>
@@ -1011,13 +1221,13 @@
                 <p>
                     Saya adalah seorang pengembang yang berfokus pada backend development, 
                     keamanan siber, dan investigasi digital. Dengan latar belakang yang kuat 
-                    dalam arsitektur sistem dan analisis forensik, saya menghadirkan solusi 
+                    dalam pentesting dan analisis forensik, saya menghadirkan solusi 
                     yang tidak hanya fungsional tetapi juga aman.
                 </p>
                 <p>
                     Setiap baris kode yang saya tulis didasarkan pada prinsip keamanan 
                     dan performa. Saya percaya bahwa teknologi terbaik adalah yang tidak 
-                    terlihat — bekerja di balik layar dengan sempurna.
+                    terlihat bekerja di balik layar
                 </p>
             </div>
             <div class="about-stats">
@@ -1041,23 +1251,151 @@
         </div>
     </section>
 
+    <!-- Journey / Perjalanan -->
+    <section id="journey" class="fade-in">
+        <div class="section-header">
+            <span class="section-label">02 // Perjalanan</span>
+            <h2 class="section-title">Jejak <span>Karir</span></h2>
+        </div>
+        <div class="timeline-wrapper">
+            <div class="timeline-line"></div>
+
+            <!-- 2019 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year-badge">2019-2022</div>
+                    <div class="timeline-card">
+                        <h3>Awal Mula Perjalanan</h3>
+                        <div class="timeline-role"><i class="fas fa-seedling"></i> Anak Yang penasaran</div>
+                        <p>
+                            Pada tahun 2019, baru mengenal tentang bahasa pemrograman dan juga Cyber Security, Selama 1 tahun
+                            Belajar basic bahasa pemrograman untuk membuat suatu website Yaitu HTML,CSS,PYTHON,JAVASCRIPT
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">HTML/CSS</span>
+                            <span class="timeline-tag">JavaScript</span>
+                            <span class="timeline-tag">Python</span>
+                            <span class="timeline-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <!-- 2020 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year-badge">2023-2024</div>
+                    <div class="timeline-card">
+                        <h3>Mendalami Backend</h3>
+                        <div class="timeline-role"><i class="fas fa-server"></i> Backend Developer</div>
+                        <p>
+                            Beralih fokus ke backend development dengan Node.js dan Python. 
+                            Karena lebih tertarik bagian dalan sisten atau bisa disebut backend.
+                            Membangun REST API pertama, belajar Flask, Express, database, Node js. 
+                            Mulai memahami konsep arsitektur sistem dan microservices.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Node.js</span>
+                            <span class="timeline-tag">Express</span>
+                            <span class="timeline-tag">PostgreSQL</span>
+                            <span class="timeline-tag">REST API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <!-- 2021 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year-badge">2024</div>
+                    <div class="timeline-card">
+                        <h3>Eksplorasi Cyber Security</h3>
+                        <div class="timeline-role"><i class="fas fa-shield-alt"></i> Security Enthusiast</div>
+                        <p>
+                            Memulai perjalanan di dunia keamanan siber. Belajar penetration testing, 
+                            vulnerability assessment, dan ethical hacking. Mendapatkan sertifikasi 
+                            dasar dan mulai berpartisipasi dalam bug bounty programs.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">OWASP</span>
+                            <span class="timeline-tag">Burp Suite</span>
+                            <span class="timeline-tag">Kali Linux</span>
+                            <span class="timeline-tag">Bug Bounty</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <!-- 2022 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year-badge">2025</div>
+                    <div class="timeline-card">
+                        <h3>Digital Investigation & OSINT</h3>
+                        <div class="timeline-role"><i class="fas fa-search"></i> Digital Investigator</div>
+                        <p>
+                            Memperluas keahlian ke investigasi digital dan Open Source Intelligence (OSINT). 
+                            Belajar teknik forensik digital, malware analysis, dan chain of custody. 
+                            Mulai menangani kasus-kasus investigasi untuk klien.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">OSINT</span>
+                            <span class="timeline-tag">Digital Forensics</span>
+                            <span class="timeline-tag">Malware Analysis</span>
+                            <span class="timeline-tag">SIEM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year-badge">2026</div>
+                    <div class="timeline-card">
+                        <h3>Enterprise Security</h3>
+                        <div class="timeline-role"><i class="fas fa-user-shield"></i> Security Specialist</div>
+                        <p>
+                            Bekerja pada proyek keamanan tingkat enterprise. Membangun sistem autentikasi 
+                            multi-factor, threat intelligence platform, dan security monitoring. 
+                            Mengimplementasikan zero-trust architecture untuk organisasi besar.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Zero Trust</span>
+                            <span class="timeline-tag">MFA</span>
+                            <span class="timeline-tag">Threat Intel</span>
+                            <span class="timeline-tag">Docker</span>
+                            <span class="timeline-tag">Kubernetes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Skills -->
     <section id="skills" class="fade-in">
         <div class="section-header">
-            <span class="section-label">02 // Keahlian</span>
+            <span class="section-label">03 // Keahlian</span>
             <h2 class="section-title">Area <span>Ekspertise</span></h2>
         </div>
         <div class="skills-grid">
             <div class="skill-card">
                 <div class="skill-icon">⚙️</div>
                 <h3>Backend Development</h3>
-                <p>Arsitektur API, microservices, database optimization, dan sistem distribusi yang scalable.</p>
+                <p>Arsitektur API, database optimization, dan sistem distribusi yang scalable.</p>
                 <div class="skill-tags">
                     <span class="skill-tag">Node.js</span>
                     <span class="skill-tag">Python</span>
                     <span class="skill-tag">Go</span>
                     <span class="skill-tag">PostgreSQL</span>
-                    <span class="skill-tag">Redis</span>
+                    <span class="skill-tag">Rest API</span>
                     <span class="skill-tag">Docker</span>
                 </div>
             </div>
@@ -1090,8 +1428,8 @@
     <!-- Projects -->
     <section id="projects" class="fade-in">
         <div class="section-header">
-            <span class="section-label">03 // Proyek</span>
-            <h2 class="section-title">Hasil <span>Karya</span></h2>
+            <span class="section-label">04 // Proyek</span>
+            <h2 class="section-title">Hasil <span>Project</span></h2>
         </div>
         <div class="projects-grid">
             <div class="project-card">
@@ -1099,13 +1437,12 @@
                 <div class="project-content">
                     <div class="project-meta">
                         <span class="project-status status-active">Aktif</span>
-                        <span class="project-year">2024</span>
+                        <span class="project-year"></span>
                     </div>
-                    <h3>SecureAuth Gateway</h3>
+                    <h3>Python Encryption</h3>
                     <p>Sistem autentikasi multi-factor dengan enkripsi end-to-end dan anomaly detection berbasis AI untuk enterprise.</p>
                     <div class="project-links">
-                        <a href="#">Lihat Detail →</a>
-                        <a href="#">GitHub ↗</a>
+                        <a href="https://github.com/AmmarrBN/AES-ECB">GitHub ↗</a>
                     </div>
                 </div>
             </div>
@@ -1114,13 +1451,13 @@
                 <div class="project-content">
                     <div class="project-meta">
                         <span class="project-status status-active">Aktif</span>
-                        <span class="project-year">2024</span>
+                        <span class="project-year"></span>
                     </div>
                     <h3>OSINT Intelligence Platform</h3>
                     <p>Platform investigasi digital dengan automated data correlation, social network analysis, dan real-time monitoring.</p>
                     <div class="project-links">
-                        <a href="#">Lihat Detail →</a>
-                        <a href="#">GitHub ↗</a>
+                        <a href="https://github.com/AmmarrBN/metadata-checker">Metadata Checker →</a>
+                        <a href="htps://t.me/SariiRooti">IntaiNet & Minerva (Premium) ↗</a>
                     </div>
                 </div>
             </div>
@@ -1129,13 +1466,12 @@
                 <div class="project-content">
                     <div class="project-meta">
                         <span class="project-status status-archive">Arsip</span>
-                        <span class="project-year">2023</span>
+                        <span class="project-year"></span>
                     </div>
                     <h3>ThreatIntel API</h3>
-                    <p>REST API untuk threat intelligence aggregation dengan support STIX/TAXII dan real-time IOC feeds.</p>
+                    <p>REST API untuk threat intelligence & Profiling.</p>
                     <div class="project-links">
-                        <a href="#">Lihat Detail →</a>
-                        <a href="#">GitHub ↗</a>
+                        <a href="https://t.me/SariiRooti">Buy API →</a>
                     </div>
                 </div>
             </div>
@@ -1145,7 +1481,7 @@
     <!-- Contact -->
     <section id="contact" class="contact-section fade-in">
         <div class="section-header">
-            <span class="section-label">04 // Kontak</span>
+            <span class="section-label">05 // Kontak</span>
             <h2 class="section-title">Mari <span>Bekerja Sama</span></h2>
         </div>
         <div class="contact-card">
@@ -1154,22 +1490,22 @@
                 Saya selalu terbuka untuk kolaborasi baru.
             </p>
             <a href="mailto:margeng84@gmail.com" class="contact-email">
-                <i class="fas fa-envelope" style="margin-right: 8px;"></i>margeng84@gmail.com
+                <i class="fas fa-envelope" style="margin-right: 8px;"></i>ammarburhanudinafis@gmail.com
             </a>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
                 Respons dalam 24 jam
             </p>
             <div class="social-links">
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub">
+                <a href="https://github.com/AmmarrBN" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn" title="LinkedIn">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook" title="Facebook">
+                <a href="https://facebook.com/profile.php?id=61559429756562" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook" title="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Telegram" title="Telegram">
+                <a href="https://t.me/SariiRooti" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Telegram" title="Telegram">
                     <i class="fab fa-telegram-plane"></i>
                 </a>
             </div>
@@ -1178,7 +1514,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2024 Ammar Burhanuddin Nafis. Dibuat dengan <span class="heart">♥</span> dan kopi.</p>
+        <p>© 2026 Ammar Burhanuddin Nafis. Dibuat dengan <span class="heart">♥</span> dan kopi.</p>
     </footer>
 
     <script>
@@ -1255,6 +1591,19 @@
             });
         }, { threshold: 0.1 });
         fadeElements.forEach(el => observer.observe(el));
+
+        // Timeline Scroll Reveal
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.15 });
+        timelineItems.forEach(item => timelineObserver.observe(item));
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
