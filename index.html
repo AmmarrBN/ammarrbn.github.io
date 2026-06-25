@@ -176,7 +176,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 120px 5% 80px; /* TOP padding increased to avoid navbar overlap */
+            padding: 140px 5% 80px;
             position: relative;
             overflow: hidden;
         }
@@ -205,26 +205,38 @@
             max-width: 800px;
             position: relative;
             z-index: 1;
-            margin-top: 20px; /* Extra space below navbar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* === PROFILE PHOTO === */
         .profile-wrapper {
             position: relative;
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 2.5rem;
+            width: 260px;
+            height: 260px;
         }
 
         .profile-container {
             position: relative;
             width: 220px;
             height: 220px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-photo {
             position: absolute;
-            inset: 8px;
+            width: 204px;
+            height: 204px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             overflow: hidden;
             z-index: 2;
@@ -240,10 +252,14 @@
             display: block;
         }
 
-        /* Rotating rings */
+        /* Rotating rings - PERFECTLY CENTERED */
         .ring-outer {
             position: absolute;
-            inset: 0;
+            width: 220px;
+            height: 220px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             border: 2px dashed var(--accent);
             opacity: 0.6;
@@ -252,7 +268,11 @@
 
         .ring-middle {
             position: absolute;
-            inset: -12px;
+            width: 244px;
+            height: 244px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             border: 1.5px dotted var(--accent);
             opacity: 0.35;
@@ -261,7 +281,11 @@
 
         .ring-inner {
             position: absolute;
-            inset: -24px;
+            width: 268px;
+            height: 268px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             border: 2px solid transparent;
             border-top-color: var(--accent);
@@ -285,28 +309,28 @@
         .ring-dot-4 { right: -4px; top: 50%; transform: translateY(-50%); }
 
         @keyframes rotate-cw {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         @keyframes rotate-ccw {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(0deg); }
         }
 
-        .profile-container:hover .ring-outer {
+        .profile-wrapper:hover .ring-outer {
             animation-duration: 10s;
             opacity: 0.9;
         }
-        .profile-container:hover .ring-middle {
+        .profile-wrapper:hover .ring-middle {
             animation-duration: 8s;
             opacity: 0.6;
         }
-        .profile-container:hover .ring-inner {
+        .profile-wrapper:hover .ring-inner {
             animation-duration: 5s;
             opacity: 0.8;
         }
-        .profile-container:hover .profile-photo {
+        .profile-wrapper:hover .profile-photo {
             box-shadow: 0 0 50px var(--accent-glow), 0 0 100px rgba(0, 212, 170, 0.2), inset 0 0 40px rgba(0, 212, 170, 0.15);
         }
 
@@ -876,16 +900,26 @@
             }
 
             section { padding: 4rem 5%; }
-            .hero { padding: 140px 5% 80px; }
+            .hero { padding: 150px 5% 80px; }
+            .profile-wrapper { width: 240px; height: 240px; }
             .profile-container { width: 200px; height: 200px; }
+            .profile-photo { width: 184px; height: 184px; }
+            .ring-outer { width: 200px; height: 200px; }
+            .ring-middle { width: 224px; height: 224px; }
+            .ring-inner { width: 248px; height: 248px; }
         }
 
         @media (max-width: 480px) {
             .about-stats { grid-template-columns: 1fr; }
             .contact-card { padding: 2rem 1.5rem; }
             .contact-email { font-size: 0.9rem; word-break: break-all; }
+            .hero { padding: 140px 5% 60px; }
+            .profile-wrapper { width: 220px; height: 220px; }
             .profile-container { width: 180px; height: 180px; }
-            .hero { padding: 130px 5% 60px; }
+            .profile-photo { width: 164px; height: 164px; }
+            .ring-outer { width: 180px; height: 180px; }
+            .ring-middle { width: 204px; height: 204px; }
+            .ring-inner { width: 228px; height: 228px; }
         }
 
         ::selection {
